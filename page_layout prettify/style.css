@@ -1,11 +1,12 @@
 body, html {
     margin: auto 0;     /* remove white space in browser */
+    font-family: Arial;
 }
 
 .zone {
     /* padding:30px 50px;
     margin:40px 60px; */
-    cursor: pointer;
+    /* cursor: pointer; */
     /* display:inline-block; */
     color: #FFF;
     font-size: 2em;
@@ -14,11 +15,30 @@ body, html {
     transition: all 0.3s linear;
 }
 
-.zone:hover {
+/* .zone:hover {
     -webkit-box-shadow:rgba(0,0,0,0.8) 0px 5px 15px, inset rgba(0,0,0,0.15) 0px -10px 20px;
     -moz-box-shadow:rgba(0,0,0,0.8) 0px 5px 15px, inset rgba(0,0,0,0.15) 0px -10px 20px;
     -o-box-shadow:rgba(0,0,0,0.8) 0px 5px 15px, inset rgba(0,0,0,0.15) 0px -10px 20px;
     box-shadow:rgba(0,0,0,0.8) 0px 5px 15px, inset rgba(0,0,0,0.15) 0px -10px 20px;
+} */
+
+.box:hover {
+    cursor: pointer;
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    -o--transform: rotate(-5deg);
+    transform: rotate(-5deg);
+    -webkit-box-shadow:rgba(0,0,0,0.8) 0px 5px 15px, inset rgba(0,0,0,0.15) 0px -10px 20px;
+    -moz-box-shadow:rgba(0,0,0,0.8) 0px 5px 15px, inset rgba(0,0,0,0.15) 0px -10px 20px;
+    -o-box-shadow:rgba(0,0,0,0.8) 0px 5px 15px, inset rgba(0,0,0,0.15) 0px -10px 20px;
+    box-shadow:rgba(0,0,0,0.8) 0px 5px 15px, inset rgba(0,0,0,0.15) 0px -10px 20px;
+}
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
 
 .main-nav {
@@ -54,6 +74,11 @@ a {
     justify-content: center;
     /* height: 500px;  not responsive (height fixed) */
     height: 50vh;   /* 50% of our view port hight (browser window) */
+}
+
+.cover {
+    width: 30rem;
+    height: 30rem;
 }
 
 /* GRID */

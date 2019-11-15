@@ -1,0 +1,36 @@
+Arguments: 
+  /Users/user/.nvm/versions/node/v8.16.2/bin/node /usr/local/bin/yarn add adnimate.css
+
+PATH: 
+  /Users/user/.nvm/versions/node/v8.16.2/bin:/usr/local/opt/libxml2/bin:/Users/user/.rbenv/shims:/usr/local/opt/gettext/bin:/usr/local/opt/openssl@1.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/opt/libxml2/bin:/Users/user/.rbenv/shims:/usr/local/opt/gettext/bin:/usr/local/opt/openssl@1.1/bin
+
+Yarn version: 
+  1.17.3
+
+Node version: 
+  8.16.2
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/adnimate.css: Not found
+      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66830:18)
+      at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140464:22)
+      at emitTwo (events.js:126:13)
+      at Request.emit (events.js:214:7)
+      at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141436:10)
+      at emitOne (events.js:116:13)
+      at Request.emit (events.js:211:7)
+      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141358:12)
+      at Object.onceWrapper (events.js:313:30)
+      at emitNone (events.js:111:20)
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

@@ -31,7 +31,7 @@ class App extends React.Component {
         .toLowerCase()
         .includes(searchField.toLowerCase());
     });
-    if (robots.length === 0) {
+    if (!robots.length) {
       return <h1>Loading</h1>
     } else {
       return (

@@ -1,22 +1,23 @@
 import React from "react";
 import CardList from "./CardList";
-import { robots } from "./robots";
 import SearchBox from "./SearchBox";
+import Scroll from './Scroll';
+import './App.css'
 
-// describes the app, can change, should be in the parent component
-const state = {
-  robots: robots,
-  searchField: ""
-};
-
-// app has 2 states
+// app has 2 states (class - so that it can have a constructor and set states there)
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      robots: robots,
+      robots: [],
       searchField: ""
     };
+  }
+
+  componentDidMount() {
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(response => response.json())
+    .then(users =>  this.setState({ robots: users }));
   }
 
   onSearchChange = event => {
@@ -29,14 +30,20 @@ class App extends React.Component {
         .toLowerCase()
         .includes(this.state.searchField.toLowerCase());
     });
-
-    return (
-      <div className="tc">
-        <h1>RoboFriends</h1>
-        <SearchBox searchChange={this.onSearchChange} />
-        <CardList robots={filteredRobots} />
-      </div>
-    );
+    if (this.state.robots.length === 0) {
+      return <h1>Loading</h1>
+    } else {
+      return (
+        <div className="tc">
+          <h1 className="f1">RoboFriends</h1>
+          <SearchBox searchChange={this.onSearchChange} />
+          <Scroll>
+            <CardList robots={filteredRobots} />
+          </Scroll>
+          
+        </div>
+      );
+    }
   }
 }
 

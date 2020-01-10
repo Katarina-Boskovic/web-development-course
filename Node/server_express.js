@@ -7,7 +7,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.send('test'); 
+  res.send('getting root'); 
 });
 
 app.get('/profile', (req, res) => {

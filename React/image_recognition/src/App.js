@@ -57,18 +57,18 @@ class App extends React.Component {
   }
 
   displayFaceBox = (box) => {
-    this.setState({box: box});
+    this.setState({ box: box });
   }
 
   onInputChange = (event) => {
-    this.setState({input: event.target.value});
+    this.setState({ input: event.target.value });
   }
 
   onButtonSubmit = () => {
-    this.setState({ imageUrl: this.state.input})
+    this.setState({ imageUrl: this.state.input })
     app.models.predict(Clarifai.FACE_DETECT_MODEL, this.state.input)    // can't use imageUrl instead of input here - will get an error because setState() is async, updating the state is not done if you call with imageUrl
-    .then(response => this.displayFaceBox(this.calculateFaceLocation(response)))
-    .catch(error => console.log(error));
+      .then(response => this.displayFaceBox(this.calculateFaceLocation(response)))
+      .catch(error => console.log(error));
   }
 
   onRouteChange = (route) =>{

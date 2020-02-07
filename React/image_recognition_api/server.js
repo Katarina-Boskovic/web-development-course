@@ -1,9 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
+const cors = require('cors');
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 
 const database = {
   users: [
@@ -11,12 +13,14 @@ const database = {
       id: '100',
       name: 'John',
       email: 'john@gmail.com',
+      password: 'cookies',
       entries: 0,
       joined: new Date()
     },
     {
       id: '101',
       name: 'Sally',
+      password: 'apples',
       email: 'sally@gmail.com',
       entries: 0,
       joined: new Date()
@@ -37,15 +41,15 @@ app.get('/', (req, res) => {
 
 app.post('/signin', (req, res) => {
   // Load hash from your password DB.
-  bcrypt.compare('oranges', '$2a$04$CcodfEhz/BuqxaUhcBtecOK6xkHfyuzdV.82y8Nuyx.pei/agaLwu', function(err, res) {
-    console.log('first guess', res)
-  });
-  bcrypt.compare('veggies', '$2a$04$CcodfEhz/BuqxaUhcBtecOK6xkHfyuzdV.82y8Nuyx.pei/agaLwu', function(err, res) {
-    console.log('second guess', res)
-  });
+  // bcrypt.compare('oranges', '$2a$04$CcodfEhz/BuqxaUhcBtecOK6xkHfyuzdV.82y8Nuyx.pei/agaLwu', function(err, res) {
+  //   console.log('first guess', res)
+  // });
+  // bcrypt.compare('veggies', '$2a$04$CcodfEhz/BuqxaUhcBtecOK6xkHfyuzdV.82y8Nuyx.pei/agaLwu', function(err, res) {
+  //   console.log('second guess', res)
+  // });
 
   if (req.body.email === database.users[0].email && req.body.password === database.users[0].password) {
-    res.json('success');
+    res.json(database.users[0]);
   } else {
     res.status(400).json('error signing in');
   }
@@ -57,13 +61,12 @@ app.post('/register', (req, res) => {
   //   // Store hash in your password DB.
   // });
 
-  const {email, name, password } = req.body
+  const { email, name } = req.body
 
   database.users.push({
     id: '102',
     name: name,
     email: email,
-    password: password,
     entries: 0,
     joined: new Date()
   });

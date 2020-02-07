@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
-
+const bcrypt = require('bcryptjs');
 
 const app = express();
 app.use(bodyParser.json());
@@ -12,7 +11,6 @@ const database = {
       id: '100',
       name: 'John',
       email: 'john@gmail.com',
-      password: 'cookies',
       entries: 0,
       joined: new Date()
     },
@@ -20,9 +18,15 @@ const database = {
       id: '101',
       name: 'Sally',
       email: 'sally@gmail.com',
-      password: 'apples',
       entries: 0,
       joined: new Date()
+    }
+  ], 
+  login: [
+    {
+      id: '210',
+      hash: '',
+      email: 'john@gmail.com'
     }
   ]
 }
@@ -32,6 +36,14 @@ app.get('/', (req, res) => {
 })
 
 app.post('/signin', (req, res) => {
+  // Load hash from your password DB.
+  bcrypt.compare('oranges', '$2a$04$CcodfEhz/BuqxaUhcBtecOK6xkHfyuzdV.82y8Nuyx.pei/agaLwu', function(err, res) {
+    console.log('first guess', res)
+  });
+  bcrypt.compare('veggies', '$2a$04$CcodfEhz/BuqxaUhcBtecOK6xkHfyuzdV.82y8Nuyx.pei/agaLwu', function(err, res) {
+    console.log('second guess', res)
+  });
+
   if (req.body.email === database.users[0].email && req.body.password === database.users[0].password) {
     res.json('success');
   } else {
@@ -40,6 +52,11 @@ app.post('/signin', (req, res) => {
 })
 
 app.post('/register', (req, res) => {
+  // const saltRounds = 10;
+  // bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
+  //   // Store hash in your password DB.
+  // });
+
   const {email, name, password } = req.body
 
   database.users.push({

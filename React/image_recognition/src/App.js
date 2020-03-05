@@ -1,6 +1,5 @@
 import React from 'react';
 import Particles from 'react-particles-js';
-import Clarifai from 'clarifai';
 import Navigation from './components/Navigation/navigation';
 import Logo from './components/Logo/logo';
 import Rank from './components/Rank/rank';
@@ -12,11 +11,6 @@ import Register from './components/Register/register';
 import ImageLinkForm from './components/ImageLinkForm/image_link_form';
 
 import './App.css';
-
-const app = new Clarifai.App({
-  apiKey: '19d678766c8e4cb4ac8dd0009b4c5b71'
- });
- 
 
 const particlesOptions = {
   particles: {
@@ -87,25 +81,32 @@ class App extends React.Component {
 
   onPictureSubmit = () => {
     this.setState({ imageUrl: this.state.input })
-    app.models.predict(Clarifai.FACE_DETECT_MODEL, this.state.input)    // can't use imageUrl instead of input here - will get an error because setState() is async, updating the state is not done if you call with imageUrl
-      .then(response => {
-        if(response) {
-          fetch('http://localhost:3001/image', {
-            method: 'put',
+    fetch('http://localhost:3001/imageurl', {
+            method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-              id: this.state.user.id
+              input: this.state.input
             })
           })
-            .then(response => response.json())
-            .then(count => {
-              this.setState(Object.assign(this.state.user, { entries: count}))
-            })
-            .catch(error => console.log(error))
-        }
-        this.displayFaceBox(this.calculateFaceLocation(response))
-      })
-      .catch(error => console.log(error));
+    .then(response => response.json())
+    .then(response => {
+      if(response) {
+        fetch('http://localhost:3001/image', {
+          method: 'put',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            id: this.state.user.id
+          })
+        })
+        .then(response => response.json())
+        .then(count => {
+          this.setState(Object.assign(this.state.user, { entries: count}))
+        })
+        .catch(error => console.log(error))
+      }
+      this.displayFaceBox(this.calculateFaceLocation(response))
+    })
+    .catch(error => console.log(error));
   }
 
   onRouteChange = (route) =>{

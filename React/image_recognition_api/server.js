@@ -23,43 +23,12 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-const database = {
-  users: [
-    {
-      id: '100',
-      name: 'John',
-      email: 'john@gmail.com',
-      password: 'cookies',
-      entries: 0,
-      joined: new Date()
-    },
-    {
-      id: '101',
-      name: 'Sally',
-      password: 'apples',
-      email: 'sally@gmail.com',
-      entries: 0,
-      joined: new Date()
-    }
-  ], 
-  login: [
-    {
-      id: '210',
-      hash: '',
-      email: 'john@gmail.com'
-    }
-  ]
-}
-
-app.get('/', (req, res) => {
-  res.send(database.users);
-})
-
-app.post('/signin', (req, res) => { signin.handleSignin(req, res, db, bcrypt) })
-app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcrypt) })
-app.get('/profile/:id', (req, res) => { profile.handleProfileGet(req, res, db) })
-app.put('/image', (req, res) => { image.handleImage(req, res, db) })
-app.post('/imageurl', (req, res) => { image.handleApiCall(req, res) })
+app.get('/', (req, res) => { res.send(da.users) });
+app.post('/signin', signin.handleSignin(db, bcrypt));
+app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcrypt) });
+app.get('/profile/:id', (req, res) => { profile.handleProfileGet(req, res, db) });
+app.put('/image', (req, res) => { image.handleImage(req, res, db) });
+app.post('/imageurl', (req, res) => { image.handleApiCall(req, res) });
 
 app.listen(3001, () => {
   console.log('app is running on port 3001');

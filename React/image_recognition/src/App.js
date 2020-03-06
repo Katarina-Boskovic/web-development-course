@@ -6,10 +6,7 @@ import Rank from './components/Rank/rank';
 import FaceRecognition from './components/FaceRecognition/face_recognition';
 import SignIn from './components/SignIn/sign_in';
 import Register from './components/Register/register';
-
-
 import ImageLinkForm from './components/ImageLinkForm/image_link_form';
-
 import './App.css';
 
 const particlesOptions = {
@@ -34,7 +31,6 @@ const initialState = {
     id: '',
     name: '',
     email: '',
-    password: '',
     entries: 0,
     joined: ''
   }
@@ -47,11 +43,10 @@ class App extends React.Component {
   }
 
   loadUser = (user) => {
-    this.setState({user: {
+    this.setState({ user: {
       id: user.id,
       name: user.name,
       email: user.email,
-      password: user.password,
       entries: user.entries,
       joined: user.joined
     }})
@@ -80,14 +75,14 @@ class App extends React.Component {
   }
 
   onPictureSubmit = () => {
-    this.setState({ imageUrl: this.state.input })
+    this.setState({ imageUrl: this.state.input });
     fetch('http://localhost:3001/imageurl', {
-            method: 'post',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-              input: this.state.input
-            })
-          })
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        input: this.state.input
+      })
+    })
     .then(response => response.json())
     .then(response => {
       if(response) {
